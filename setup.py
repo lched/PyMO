@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pymo",
-    version="0.0.1",
+    version="0.0.2",
     author="Omid Alemi",
     author_email="omid.alemi@gmail.com",
     description="A library for using motion capture data",
