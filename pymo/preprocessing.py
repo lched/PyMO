@@ -4,6 +4,7 @@ Preprocessing Tranformers Based on sci-kit's API
 By Omid Alemi
 Created on June 12, 2017
 """
+
 import copy
 import pandas as pd
 import numpy as np
@@ -635,9 +636,9 @@ class RootCentricPositionNormalizer(BaseEstimator, TransformerMixin):
 
             projected_root_pos = track.values[[rxp, ryp, rzp]]
 
-            projected_root_pos.loc[
-                :, ryp
-            ] = 0  # we want the root's projection on the floor plane as the ref
+            projected_root_pos.loc[:, ryp] = (
+                0  # we want the root's projection on the floor plane as the ref
+            )
 
             new_df = pd.DataFrame(index=track.values.index)
 
@@ -682,9 +683,9 @@ class RootCentricPositionNormalizer(BaseEstimator, TransformerMixin):
 
             projected_root_pos = track.values[[rxp, ryp, rzp]]
 
-            projected_root_pos.loc[
-                :, ryp
-            ] = 0  # we want the root's projection on the floor plane as the ref
+            projected_root_pos.loc[:, ryp] = (
+                0  # we want the root's projection on the floor plane as the ref
+            )
 
             new_df = pd.DataFrame(index=track.values.index)
 

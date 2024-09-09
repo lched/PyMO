@@ -7,6 +7,7 @@ Created: June 12, 2017
 Based on: https://gist.github.com/johnfredcee/2007503
 
 """
+
 import re
 import numpy as np
 from pymo.data import MocapData
@@ -18,6 +19,7 @@ class BVHScanner:
     """
 
     def __init__(self):
+
         def identifier(scanner, token):
             return "IDENT", token
 
@@ -59,8 +61,9 @@ class BVHParser:
     Extracts the skeleton and channel values
     """
 
-    def __init__(self, filename=None):
+    def __init__(self, filename=None, filter_end_sites=True):
         self.reset()
+        self.filter_end_sites = filter_end_sites
 
     def reset(self):
         self._skeleton = {}
@@ -160,7 +163,7 @@ class BVHParser:
         token_index = token_index + 1
         offsets, token_index = self._read_offset(bvh, token_index)
         joint["offsets"] = offsets
-        if not end_site:
+        if not end_site or not self.filter_end_sites:
             channels, token_index = self._read_channels(bvh, token_index)
             joint["channels"] = channels
             for channel in channels:

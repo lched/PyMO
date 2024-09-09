@@ -4,6 +4,7 @@ A set of mocap feature extraction functions
 Created by Omid Alemi | Nov 17 2017
 
 """
+
 import peakutils
 import matplotlib.pyplot as plt
 

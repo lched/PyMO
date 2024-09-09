@@ -15,18 +15,14 @@ A library for using motion capture data for machine learning
 * Write BVH Files
 * Pre-processing pipelines
     * [Supporting `scikit-learn` API](#scikit-learn-pipeline-api)
-    * Convert data representations 
+    * Convert data representations
         * [Euler angles to positions](#convert-to-positions)
         * Euler angles to exponential maps
         * Exponential maps to euler angles
     * Body-oriented global translation and rotation calculation with inverse tranform
     * Root-centric position normalizer with inverse tranform
     * Standard scaler
-    * Joint selectors        
-* Visualization tools
-    * [Skeleton hierarchy](#get-skeleton-info)
-    * [2D frame visualization](#visualize-a-single-2d-frame)
-    * [3D webgl-based animation](#animate-in-3d-inside-a-jupyter-notebook)
+    * Joint selectors
 * Annotations
     * Foot/ground contact detector
 
@@ -39,47 +35,6 @@ from pymo.parsers import BVHParser
 parser = BVHParser()
 
 parsed_data = parser.parse('demos/data/AV_8Walk_Meredith_HVHA_Rep1.bvh')
-```
-
-### Get Skeleton Info
-
-```python
-from pymo.viz_tools import *
-
-print_skel(parsed_data)
-```
-Will print the skeleton hierarchy:
-```
-- Hips (None)
-| | - RightUpLeg (Hips)
-| | - RightLeg (RightUpLeg)
-| | - RightFoot (RightLeg)
-| | - RightToeBase (RightFoot)
-| | - RightToeBase_Nub (RightToeBase)
-| - LeftUpLeg (Hips)
-| - LeftLeg (LeftUpLeg)
-| - LeftFoot (LeftLeg)
-| - LeftToeBase (LeftFoot)
-| - LeftToeBase_Nub (LeftToeBase)
-- Spine (Hips)
-| | - RightShoulder (Spine)
-| | - RightArm (RightShoulder)
-| | - RightForeArm (RightArm)
-| | - RightHand (RightForeArm)
-| | | - RightHand_End (RightHand)
-| | | - RightHand_End_Nub (RightHand_End)
-| | - RightHandThumb1 (RightHand)
-| | - RightHandThumb1_Nub (RightHandThumb1)
-| - LeftShoulder (Spine)
-| - LeftArm (LeftShoulder)
-| - LeftForeArm (LeftArm)
-| - LeftHand (LeftForeArm)
-| | - LeftHand_End (LeftHand)
-| | - LeftHand_End_Nub (LeftHand_End)
-| - LeftHandThumb1 (LeftHand)
-| - LeftHandThumb1_Nub (LeftHandThumb1)
-- Head (Spine)
-- Head_Nub (Head)
 ```
 
 
@@ -110,24 +65,6 @@ mp = MocapParameterizer('position')
 
 positions = mp.fit_transform([parsed_data])
 ```
-
-### Visualize a single 2D Frame
-
-```python
-draw_stickfigure(positions[0], frame=10)
-```
-
-![2D Skeleton Viz](assets/viz_skel_2d.png)
-
-### Animate in 3D (inside a Jupyter Notebook)
-
-```python
-nb_play_mocap(positions[0], 'pos', 
-              scale=2, camera_z=800, frame_time=1/120, 
-              base_url='pymo/mocapplayer/playBuffer.html')
-```
-
-![Mocap Player](assets/mocap_player.png)
 
 
 ### Foot/Ground Contact Detector
